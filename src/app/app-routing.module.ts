@@ -9,10 +9,32 @@ import { AuthGuard } from './_auth/auth.guard';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'admin', component: AdminComponent, canActivate:[AuthGuard], data:{roles:['Admin']} },
-  { path: 'user', component: UserComponent ,  canActivate:[AuthGuard], data:{roles:['User']} },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['Admin'] },
+  },
+  {
+    path: 'user',
+    component: UserComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['User'] },
+  },
+  // {
+  //   path: 'allOrders',
+  //   component: OrdersComponent,
+  //   canActivate: [AuthGuard],
+  //   data: { roles: ['admin'] },
+  // },
+  // {
+  //   path: 'myOrders',
+  //   component: OrdersComponent,
+  //   canActivate: [AuthGuard],
+  //   data: { roles: ['user'] },
+  // },
   { path: 'login', component: LoginComponent },
-  { path: 'forbidden', component: ForbiddenComponent }
+  { path: 'forbidden', component: ForbiddenComponent },
 ];
 
 @NgModule({

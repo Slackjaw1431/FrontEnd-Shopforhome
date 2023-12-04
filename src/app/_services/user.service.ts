@@ -26,7 +26,6 @@ export class UserService {
     });
   }
 
-
   public forAdmin() {
     return this.httpclient.get(this.PATH_OF_API + '/forAdmin', {
       responseType: 'text',
