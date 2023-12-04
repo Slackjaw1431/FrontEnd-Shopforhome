@@ -10,16 +10,26 @@ import { User } from '../user/user';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
   user: User = {
-    firstName: '',
-    lastName: '',
-    username: '',
-    password: '',
+    userFirstName: '',
+    userLastName: '',
+    userName: '',
+    userPassword: '',
   };
-  constructor() {}
+  constructor(private userService: UserService) {}
 
-  ngOnInit(): void {}
-
-  onSubmit() {}
+  registerUser(): void {
+    console.log(this.user);
+    this.userService.registerUser(this.user).subscribe(
+      (response) => {
+        console.log('User registered successfully:', response);
+        // Additional handling after successful registration
+      },
+      (error) => {
+        console.error('Error registering user:', error);
+        // Handle error
+      }
+    );
+  }
 }

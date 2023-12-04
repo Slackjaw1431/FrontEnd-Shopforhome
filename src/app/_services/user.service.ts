@@ -1,12 +1,15 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserAuthService } from './user-auth.service';
+import { Observable } from 'rxjs';
+import { User } from '../user/user';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
   PATH_OF_API = 'http://localhost:9090';
+  private newUser = '/registerNewUser';
 
   requestHeader = new HttpHeaders({ 'No-Auth': 'True' });
   constructor(
@@ -18,6 +21,14 @@ export class UserService {
     return this.httpclient.post(this.PATH_OF_API + '/authenticate', loginData, {
       headers: this.requestHeader,
     });
+  }
+
+  registerUser(user: any): Observable<any> {
+    return this.httpclient.post<any>(this.PATH_OF_API + this.newUser, user);
+  }
+
+  getUsers(): Observable<User[]> {
+    return this.httpclient.get<User[]>('http://localhost:9090/admin/allUsers');
   }
 
   public forUser() {
