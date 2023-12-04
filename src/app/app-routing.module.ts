@@ -6,6 +6,9 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
 import { AuthGuard } from './_auth/auth.guard';
+import { AllusersComponent } from './allusers/allusers.component';
+import { RegisterComponent } from './register/register.component';
+import { BooksComponent } from './books/books.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -25,15 +28,27 @@ const routes: Routes = [
   //   path: 'allOrders',
   //   component: OrdersComponent,
   //   canActivate: [AuthGuard],
-  //   data: { roles: ['admin'] },
+  //   data: { roles: ['Admin'] },
   // },
   // {
   //   path: 'myOrders',
   //   component: OrdersComponent,
   //   canActivate: [AuthGuard],
-  //   data: { roles: ['user'] },
+  //   data: { roles: ['User'] },
+  // },
+  {
+    path: 'allUsers',
+    component: BooksComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['Admin'] },
+  },
+  // {
+  //   path: 'allProducts',
+  //   component: ProductListComponent,
   // },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+
   { path: 'forbidden', component: ForbiddenComponent },
 ];
 

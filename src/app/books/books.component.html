@@ -1,0 +1,42 @@
+<div class="container">
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Category</th>
+        <th>Quantity</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of posts">
+        <td>{{ p.bookTitle }}</td>
+        <td>{{ p.author }}</td>
+        <td>{{ p.category }}</td>
+        <td>{{ p.quantity }}</td>
+        <td>{{ p.bookPrice }}</td>
+        <td>
+          <a [routerLink]="['/book-detail/', p.id]" class="btn btn-primary"
+            >View</a
+          >
+        </td>
+        <td>
+          <a [routerLink]="['/update-book/', p.id]" class="btn btn-secondary"
+            >Update</a
+          >
+        </td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="deleteBook(p.id)"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br />
