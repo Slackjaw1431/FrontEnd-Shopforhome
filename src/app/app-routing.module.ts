@@ -36,14 +36,8 @@ const routes: Routes = [
   //   canActivate: [AuthGuard],
   //   data: { roles: ['User'] },
   // },
-  // {
-  //   path: 'allUsers',
-  //   component: BooksComponent,
-  //   canActivate: [AuthGuard],
-  //   data: { roles: ['Admin'] },
-  // },
   {
-    path: 'admin/allUsers',
+    path: 'allUsers',
     component: AllusersComponent,
     canActivate: [AuthGuard],
     data: { roles: ['Admin'] },

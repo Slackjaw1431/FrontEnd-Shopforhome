@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../_services/user.service';
 
 @Component({
   selector: 'app-admin',
@@ -6,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin.component.css'],
 })
 export class AdminComponent implements OnInit {
-  constructor() {}
+  message;
+  constructor(private userService: UserService) {}
 
   ngOnInit(): void {
+    this.forAdmin();
     // Check if the token exists and then print it to the console
     //   const jwtToken = localStorage.getItem('jwtToken');
     //   if (jwtToken) {
@@ -16,5 +19,16 @@ export class AdminComponent implements OnInit {
     //   } else {
     //     console.log('JWT Token not found');
     //   }
+  }
+  forAdmin() {
+    this.userService.forAdmin().subscribe(
+      (response) => {
+        console.log(response);
+        this.message = response;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }

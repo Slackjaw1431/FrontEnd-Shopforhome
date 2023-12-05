@@ -33,7 +33,7 @@
           <a
             class="nav-link active"
             aria-current="page"
-            routerLink="/admin/allUsers"
+            routerLink="/allUsers"
             *ngIf="userService.roleMatch(['Admin'])"
             >View All Users</a
           >
@@ -42,7 +42,7 @@
           <a
             class="nav-link active"
             aria-current="page"
-            routerLink="/admin/users"
+            routerLink="/allOrders"
             *ngIf="userService.roleMatch(['Admin'])"
             >View All Orders</a
           >

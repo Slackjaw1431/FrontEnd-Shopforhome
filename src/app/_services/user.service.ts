@@ -28,7 +28,7 @@ export class UserService {
   }
 
   getUsers(): Observable<User[]> {
-    return this.httpclient.get<User[]>('http://localhost:9090/admin/allUsers');
+    return this.httpclient.get<User[]>('http://localhost:9090/allUsers');
   }
 
   public forUser() {
