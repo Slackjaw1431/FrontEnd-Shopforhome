@@ -24,12 +24,21 @@ export class CartService {
       // compute totals based on the data that is read from storage
       this.computeCartTotals();
     }
+
+    if (data === null) {
+      const item1 = new CartItem('123', 'Product A', 'image-url', 10.99, 2);
+      const item2 = new CartItem('123', 'Product B', 'image-url', 10.99, 1);
+
+      this.cartItems.push(item1);
+      this.cartItems.push(item2);
+
+      this.computeCartTotals();
+    }
   }
 
   addToCart(theCartItem: CartItem) {
     // check if we already have the item in our cart
     let alreadyExistsInCart: boolean = false;
-    // let existingCartItem: CartItem = undefined;
     let existingCartItem: CartItem = new CartItem();
 
     if (this.cartItems.length > 0) {
@@ -63,6 +72,8 @@ export class CartService {
       totalPriceValue += currentCartItem.quantity * currentCartItem.unitPrice!;
       totalQuantityValue += currentCartItem.quantity;
     }
+
+    console.log('Signed in as: ' + localStorage.getItem('userName'));
 
     // publish the new values ... all subscribers will receive the new data
     this.totalPrice.next(totalPriceValue);

@@ -8,7 +8,7 @@ import { UserComponent } from './user/user.component';
 import { AuthGuard } from './_auth/auth.guard';
 import { AllusersComponent } from './allusers/allusers.component';
 import { RegisterComponent } from './register/register.component';
-import { BooksComponent } from './books/books.component';
+import { CartDetailsComponent } from './cart-details/cart-details.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -50,6 +50,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
 
   { path: 'forbidden', component: ForbiddenComponent },
+  { path: 'cart-details', component: CartDetailsComponent },
 ];
 
 @NgModule({

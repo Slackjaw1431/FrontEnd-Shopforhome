@@ -57,22 +57,39 @@
     </form>
   </div>
 </div> -->
-<form (ngSubmit)="registerUser()">
-  <input type="text" [(ngModel)]="user.userName" placeholder="Username" /><br />
-  <input
-    type="text"
-    [(ngModel)]="user.userFirstName"
-    placeholder="First Name"
-  /><br />
-  <input
-    type="text"
-    [(ngModel)]="user.userLastName"
-    placeholder="Last Name"
-  /><br />
-  <input
-    type="password"
-    [(ngModel)]="user.userPassword"
-    placeholder="Password"
-  /><br />
-  <button type="submit">Register</button>
-</form>
+<div class="container mt-5">
+  <div class="card" style="padding: 20px">
+    <form (ngSubmit)="registerUser()">
+      <input
+        type="text"
+        class="form-control mb-3"
+        [(ngModel)]="user.userFirstName"
+        placeholder="First Name"
+      /><br />
+      <input
+        type="text"
+        class="form-control mb-3"
+        [(ngModel)]="user.userLastName"
+        placeholder="Last Name"
+      /><br />
+      <input
+        type="text"
+        class="form-control mb-3"
+        [(ngModel)]="user.userName"
+        placeholder="Username"
+      /><br />
+      <input
+        type="password"
+        class="form-control mb-3"
+        [(ngModel)]="user.userPassword"
+        placeholder="Password"
+      /><br />
+      <button
+        type="submit"
+        class="btn btn-outline-primary form-control rounded-0"
+      >
+        Register
+      </button>
+    </form>
+  </div>
+</div>

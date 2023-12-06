@@ -18,8 +18,9 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { UserComponent } from './user/user.component';
+import { CartStatusComponent } from './cart-status/cart-status.component';
+import { CartDetailsComponent } from './cart-details/cart-details.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
-import { BooksComponent } from './books/books.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { BooksComponent } from './books/books.component';
     ForbiddenComponent,
     RegisterComponent,
     AllusersComponent,
-    BooksComponent,
+    CartStatusComponent,
+    CartDetailsComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,8 @@
+table.table-bordered {
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+  border: none;
+  margin: 0 auto;
+  max-width: 800px;
+}

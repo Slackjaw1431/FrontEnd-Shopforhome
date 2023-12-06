@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark custom-bg">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">ShopForHome</a>
     <button
@@ -73,6 +73,7 @@
       >
         Login
       </button>
+      &nbsp;
       <button
         *ngIf="!isLoggedIn()"
         type="button"
@@ -81,6 +82,7 @@
       >
         Register
       </button>
+      &nbsp;
       <button
         *ngIf="isLoggedIn()"
         type="button"
@@ -89,6 +91,7 @@
       >
         Profile
       </button>
+      &nbsp;
       <button
         *ngIf="isLoggedIn()"
         type="button"
@@ -97,6 +100,8 @@
       >
         Logout
       </button>
+      &nbsp;
+      <app-cart-status></app-cart-status>
     </div>
   </div>
 </nav>
