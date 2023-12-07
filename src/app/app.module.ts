@@ -25,6 +25,7 @@ import { UserComponent } from './user/user.component';
 import { ProductCategoryMenuComponent } from './product-category-menu/product-category-menu.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { ProductByCategoryComponent } from './product-by-category/product-by-category.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
     ProductCategoryMenuComponent,
     ProductListComponent,
     ProductDetailsComponent,
+    ProductByCategoryComponent,
   ],
   imports: [
     BrowserModule,

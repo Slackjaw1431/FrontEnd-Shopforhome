@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -80,6 +80,12 @@ export class ProductService {
 
   getAllProducts(): Observable<Product[]> {
     let products = this.httpClient.get<GetResponseProducts>(this.baseUrl);
+    return products.pipe(map((response) => response._embedded.products));
+  }
+
+  getProductsByCategory(categoryId: number): Observable<Product[]> {
+    const url = `${this.categoryUrl}/${categoryId}/products`;
+    let products = this.httpClient.get<GetResponseProducts>(url);
     return products.pipe(map((response) => response._embedded.products));
   }
 }

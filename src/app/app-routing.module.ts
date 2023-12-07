@@ -11,6 +11,7 @@ import { RegisterComponent } from './register/register.component';
 import { UserComponent } from './user/user.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductListComponent } from './product-list/product-list.component';
+import { ProductByCategoryComponent } from './product-by-category/product-by-category.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -51,6 +52,10 @@ const routes: Routes = [
   { path: 'category/:id', component: ProductListComponent },
   { path: 'category', component: ProductListComponent },
   { path: 'products', component: ProductListComponent },
+  {
+    path: 'product-category/category/:id',
+    component: ProductByCategoryComponent,
+  },
 
   { path: 'forbidden', component: ForbiddenComponent },
   { path: 'cart-details', component: CartDetailsComponent },
