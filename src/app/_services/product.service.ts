@@ -27,7 +27,7 @@ export class ProductService {
 
   getProduct(theProductId: number): Observable<Product> {
     // need to build URL based on product id
-    const productUrl = `${this.baseUrl}/${theProductId}`;
+    const productUrl = `http://localhost:9090/products/${theProductId}`;
 
     return this.httpClient.get<Product>(productUrl);
   }
@@ -39,7 +39,7 @@ export class ProductService {
   ): Observable<GetResponseProducts> {
     // need to build URL based on category id, page and size
     const searchUrl =
-      `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}` +
+      `http://localhost:9090/products/search/findByCategoryId?id=${theCategoryId}` +
       `&page=${thePage}&size=${thePageSize}`;
 
     return this.httpClient.get<GetResponseProducts>(searchUrl);
@@ -76,6 +76,11 @@ export class ProductService {
     return this.httpClient
       .get<GetResponseProducts>(searchUrl)
       .pipe(map((response) => response._embedded.products));
+  }
+
+  getAllProducts(): Observable<Product[]> {
+    let products = this.httpClient.get<GetResponseProducts>(this.baseUrl);
+    return products.pipe(map((response) => response._embedded.products));
   }
 }
 

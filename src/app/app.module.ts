@@ -23,6 +23,8 @@ import { RegisterComponent } from './register/register.component';
 import { SearchComponent } from './search/search.component';
 import { UserComponent } from './user/user.component';
 import { ProductCategoryMenuComponent } from './product-category-menu/product-category-menu.component';
+import { ProductListComponent } from './product-list/product-list.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { ProductCategoryMenuComponent } from './product-category-menu/product-ca
     CartDetailsComponent,
     SearchComponent,
     ProductCategoryMenuComponent,
+    ProductListComponent,
+    ProductDetailsComponent,
   ],
   imports: [
     BrowserModule,

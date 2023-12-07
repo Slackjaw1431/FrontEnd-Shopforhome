@@ -26,11 +26,13 @@ export class CartService {
     }
 
     if (data === null) {
-      const item1 = new CartItem('123', 'Product A', 'image-url', 10.99, 2);
-      const item2 = new CartItem('123', 'Product B', 'image-url', 10.99, 1);
+      // const item1 = new CartItem('123', 'Product A', 'image-url', 10.99, 1);
+      // const item2 = new CartItem('123', 'Product B', 'image-url', 10.99, 1);
+      // const item3 = new CartItem('123', 'Product A', 'image-url', 10.99, 1);
 
-      this.cartItems.push(item1);
-      this.cartItems.push(item2);
+      // this.cartItems.push(item1);
+      // this.cartItems.push(item2);
+      // this.cartItems.push(item3);
 
       this.computeCartTotals();
     }
@@ -129,5 +131,10 @@ export class CartService {
 
       this.computeCartTotals();
     }
+  }
+
+  clearCart(): void {
+    this.cartItems = [];
+    this.computeCartTotals();
   }
 }
