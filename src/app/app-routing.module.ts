@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './_auth/auth.guard';
 import { AdminComponent } from './admin/admin.component';
+import { AllusersComponent } from './allusers/allusers.component';
+import { CartDetailsComponent } from './cart-details/cart-details.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { UserComponent } from './user/user.component';
-import { AuthGuard } from './_auth/auth.guard';
-import { AllusersComponent } from './allusers/allusers.component';
 import { RegisterComponent } from './register/register.component';
-import { CartDetailsComponent } from './cart-details/cart-details.component';
+import { UserComponent } from './user/user.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -42,15 +42,14 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: ['Admin'] },
   },
-  // {
-  //   path: 'allProducts',
-  //   component: ProductListComponent,
-  // },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
 
   { path: 'forbidden', component: ForbiddenComponent },
   { path: 'cart-details', component: CartDetailsComponent },
+
+  { path: '', redirectTo: '/products', pathMatch: 'full' },
+  { path: '**', redirectTo: '/products', pathMatch: 'full' },
 ];
 
 @NgModule({

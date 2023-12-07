@@ -1,0 +1,13 @@
+.category-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: inline-flex; /* Display as inline block to center */
+}
+.category-list li {
+  margin-right: 10px; /* Adjust margin as needed */
+}
+
+.category-container {
+  text-align: center;
+}

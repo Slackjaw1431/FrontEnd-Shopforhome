@@ -13,14 +13,16 @@ import { AdminComponent } from './admin/admin.component';
 import { AllusersComponent } from './allusers/allusers.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CartDetailsComponent } from './cart-details/cart-details.component';
+import { CartStatusComponent } from './cart-status/cart-status.component';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { SearchComponent } from './search/search.component';
 import { UserComponent } from './user/user.component';
-import { CartStatusComponent } from './cart-status/cart-status.component';
-import { CartDetailsComponent } from './cart-details/cart-details.component';
-import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { ProductCategoryMenuComponent } from './product-category-menu/product-category-menu.component';
 
 @NgModule({
   declarations: [
@@ -28,13 +30,15 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
     HomeComponent,
     AdminComponent,
     UserComponent,
-    LoginComponent,
     HeaderComponent,
+    LoginComponent,
     ForbiddenComponent,
     RegisterComponent,
     AllusersComponent,
     CartStatusComponent,
     CartDetailsComponent,
+    SearchComponent,
+    ProductCategoryMenuComponent,
   ],
   imports: [
     BrowserModule,
