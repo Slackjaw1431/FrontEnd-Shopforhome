@@ -26,6 +26,7 @@ import { ProductCategoryMenuComponent } from './product-category-menu/product-ca
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductByCategoryComponent } from './product-by-category/product-by-category.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { ProductByCategoryComponent } from './product-by-category/product-by-cat
     ProductListComponent,
     ProductDetailsComponent,
     ProductByCategoryComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

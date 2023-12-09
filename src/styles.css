@@ -391,6 +391,37 @@ input.au-input.au-input-xl {
   color: #0da8e4;
 }
 
+.page-navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px; /* Adjust margin as needed */
+}
+
+.page-navigation button {
+  padding: 8px 16px;
+  margin: 0 5px;
+  border: 1px solid #ccc;
+  background-color: #f5f5f5;
+  color: #333;
+  cursor: pointer;
+}
+
+.page-navigation button:hover {
+  background-color: #e0e0e0;
+}
+
+.page-navigation span {
+  margin: 0 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.site-wide {
+  background-color: #f5f0e1; /* Light brown background color */
+  /* Ensure the background covers the entire viewport height */
+}
+
 /* 
  * ----------------------------
  * Header Mobile Section
@@ -790,8 +821,10 @@ footer ul li a {
 footer {
   background: #232324;
   z-index: 1;
-  position: relative;
+  position: fixed;
   text-align: center;
+  min-height: 100px;
+  width: 100%;
 }
 footer li a {
   color: #313131;

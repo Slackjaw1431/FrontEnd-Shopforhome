@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { ProductService } from '../_services/product.service';
 import { Product } from '../product';
 import { CartItem } from '../cart-item';
 import { CartService } from '../_services/cart.service';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-product-by-category',
@@ -11,11 +12,17 @@ import { CartService } from '../_services/cart.service';
   styleUrls: ['./product-by-category.component.css'],
 })
 export class ProductByCategoryComponent implements OnInit {
-  products: any[] = [];
+  products: Product[] = [];
+  page = {
+    size: 0,
+    totalElements: 0,
+    totalPages: 0,
+    number: 0,
+  };
 
-  categoryId: number = 1; // Replace with the selected category ID
-  currentPage: number = 1;
-  pageSize: number = 10;
+  categoryId: number = +this.route.snapshot.paramMap.get('id')!;
+  currentPage: number = 0;
+  pageSize: number = 5;
 
   constructor(
     private productService: ProductService,
@@ -24,18 +31,36 @@ export class ProductByCategoryComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(() => {
-      this.getProductsByCategory();
-    });
+    this.getProductsByCategory();
   }
 
   getProductsByCategory(): void {
-    const categoryId: number = +this.route.snapshot.paramMap.get('id')!;
-    console.log(categoryId);
+    this.route.paramMap
+      .pipe(
+        switchMap((params: ParamMap) => {
+          this.categoryId = +params.get('id')!;
+          return this.productService.getProductsByCategory(
+            this.categoryId,
+            this.currentPage,
+            this.pageSize
+          );
+        })
+      )
+      .subscribe((response: ProductsPageResponse) => {
+        this.products = response.products;
+        console.log(this.products);
+        this.page = response.page;
+      });
+  }
 
-    this.productService.getProductsByCategory(categoryId).subscribe((data) => {
-      this.products = data;
-    });
+  onPageChange(pageNumber: number): void {
+    this.currentPage = pageNumber;
+    this.getProductsByCategory();
+  }
+
+  onItemsPerPageChange(pageSize: number): void {
+    this.pageSize = pageSize;
+    this.getProductsByCategory();
   }
 
   addToCart(theProduct: Product) {
@@ -51,4 +76,14 @@ export class ProductByCategoryComponent implements OnInit {
 
     this.cartService.addToCart(theCartItem);
   }
+}
+
+interface ProductsPageResponse {
+  products: Product[];
+  page: {
+    size: number;
+    totalElements: number;
+    totalPages: number;
+    number: number;
+  };
 }

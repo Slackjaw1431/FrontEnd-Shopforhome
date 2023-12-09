@@ -32,4 +32,18 @@
       </div>
     </div>
   </div>
+  <!-- {{ page.number }}
+  {{ page.totalPages }}
+  {{ page.size }}
+  {{ page.totalElements }} -->
+  <div class="page-navigation" *ngIf="products?.length != 0">
+    <button (click)="onPageChange(page.number - 1)">Previous</button>
+    <span>Page {{ page.number + 1 }} of {{ page.totalPages }}</span>
+    <button
+      [disabled]="page.number === page.totalPages - 1"
+      (click)="onPageChange(page.number + 1)"
+    >
+      Next
+    </button>
+  </div>
 </div>

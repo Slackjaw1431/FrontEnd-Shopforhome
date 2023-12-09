@@ -10,4 +10,5 @@
 
 .category-container {
   text-align: center;
+  min-width: 100%;
 }
