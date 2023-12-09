@@ -29,3 +29,13 @@
   </table>
 </div>
 <br />
+<div class="page-navigation" *ngIf="users?.length != 0">
+  <button (click)="onPageChange(currentPage - 1)">Previous</button>
+  <span>Page {{ currentPage + 1 }} of {{ totalPages }}</span>
+  <button
+    [disabled]="currentPage === totalPages - 1"
+    (click)="onPageChange(currentPage + 1)"
+  >
+    Next
+  </button>
+</div>

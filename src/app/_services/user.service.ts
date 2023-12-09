@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserAuthService } from './user-auth.service';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { User } from '../user/user';
 
 @Injectable({
@@ -27,8 +27,22 @@ export class UserService {
     return this.httpclient.post<any>(this.PATH_OF_API + this.newUser, user);
   }
 
-  getUsers(): Observable<User[]> {
-    return this.httpclient.get<User[]>('http://localhost:9090/allUsers');
+  // getUsers(): Observable<User[]> {
+  //   return this.httpclient.get<User[]>('http://localhost:9090/allUsers');
+  // }
+
+  getUsers(page: number, size: number): Observable<UserPageResponse> {
+    const url = `http://localhost:9090/allUsersPage?page=${page}&size=${size}`;
+
+    return this.httpclient.get<PageableResponse>(url).pipe(
+      map((response: PageableResponse) => ({
+        users: response.content,
+        totalElements: response.totalElements,
+        totalPages: response.totalPages,
+        size: response.size,
+        number: response.number,
+      }))
+    );
   }
 
   public forUser() {
@@ -60,4 +74,33 @@ export class UserService {
       }
     }
   }
+}
+
+interface UserPageResponse {
+  users: User[];
+  totalElements: number;
+  totalPages: number;
+  size: number;
+  number: number;
+}
+
+interface PageableResponse {
+  content: User[];
+  pageable: {
+    sort: { sorted: boolean; unsorted: boolean; empty: boolean };
+    offset: number;
+    pageNumber: number;
+    pageSize: number;
+    paged: boolean;
+    unpaged: boolean;
+  };
+  last: boolean;
+  totalElements: number;
+  totalPages: number;
+  size: number;
+  number: number;
+  sort: { sorted: boolean; unsorted: boolean; empty: boolean };
+  numberOfElements: number;
+  first: boolean;
+  empty: boolean;
 }

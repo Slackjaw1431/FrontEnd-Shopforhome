@@ -39,9 +39,7 @@ export class ProductListComponent implements OnInit {
       .getAllProducts(this.currentPage, this.pageSize)
       .subscribe((response: ProductsPageResponse) => {
         this.products = response.products;
-        console.log(this.products);
         this.page = response.page;
-        console.log(this.page);
       });
   }
 

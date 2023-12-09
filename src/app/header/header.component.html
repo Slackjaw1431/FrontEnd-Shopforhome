@@ -38,7 +38,7 @@
             >View All Users</a
           >
         </li>
-        <li>
+        <!-- <li>
           <a
             class="nav-link active"
             aria-current="page"
@@ -46,7 +46,7 @@
             *ngIf="userService.roleMatch(['Admin'])"
             >View All Orders</a
           >
-        </li>
+        </li> -->
         <li>
           <a class="nav-link active" aria-current="page" routerLink="/products"
             >View All Products</a
@@ -61,9 +61,9 @@
             >User Dashboard</a
           >
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <app-search></app-search>
-        </li>
+        </li> -->
       </ul>
       <button
         *ngIf="!isLoggedIn()"

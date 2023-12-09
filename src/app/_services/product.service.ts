@@ -88,7 +88,7 @@ export class ProductService {
   ): Observable<ProductsPageResponse> {
     const url = `${this.baseUrl}?page=${currentPage}&size=${pageSize}`;
 
-    return this.httpClient.get<GetResponseProducts>(this.baseUrl).pipe(
+    return this.httpClient.get<GetResponseProducts>(url).pipe(
       map((response: GetResponseProducts) => ({
         products: response._embedded.products,
         page: response.page,
