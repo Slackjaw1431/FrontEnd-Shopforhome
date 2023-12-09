@@ -78,9 +78,22 @@ export class ProductService {
       .pipe(map((response) => response._embedded.products));
   }
 
-  getAllProducts(): Observable<Product[]> {
-    let products = this.httpClient.get<GetResponseProducts>(this.baseUrl);
-    return products.pipe(map((response) => response._embedded.products));
+  // getAllProducts(): Observable<Product[]> {
+  //   let products = this.httpClient.get<GetResponseProducts>(this.baseUrl);
+  //   return products.pipe(map((response) => response._embedded.products));
+  // }
+  getAllProducts(
+    currentPage: number,
+    pageSize: number
+  ): Observable<ProductsPageResponse> {
+    const url = `${this.baseUrl}?page=${currentPage}&size=${pageSize}`;
+
+    return this.httpClient.get<GetResponseProducts>(this.baseUrl).pipe(
+      map((response: GetResponseProducts) => ({
+        products: response._embedded.products,
+        page: response.page,
+      }))
+    );
   }
 
   getProductsByCategory(

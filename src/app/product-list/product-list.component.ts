@@ -12,17 +12,16 @@ import { CartService } from 'src/app/_services/cart.service';
   styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent implements OnInit {
-  products: any;
-  currentCategoryId: number = 1;
-  previousCategoryId: number = 1;
-  searchMode: boolean = false;
+  products: Product[] = [];
+  page = {
+    size: 0,
+    totalElements: 0,
+    totalPages: 0,
+    number: 0,
+  };
 
-  // new properties for pagination
-  thePageNumber: number = 1;
-  thePageSize: number = 5;
-  theTotalElements: number = 0;
-
-  previousKeyword: string = '';
+  currentPage: number = 0;
+  pageSize: number = 5;
 
   constructor(
     private productService: ProductService,
@@ -31,7 +30,29 @@ export class ProductListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.products = this.productService.getAllProducts();
+    // this.products = this.productService.getAllProducts();
+    this.getAllProducts();
+  }
+
+  getAllProducts(): void {
+    this.productService
+      .getAllProducts(this.currentPage, this.pageSize)
+      .subscribe((response: ProductsPageResponse) => {
+        this.products = response.products;
+        console.log(this.products);
+        this.page = response.page;
+        console.log(this.page);
+      });
+  }
+
+  onPageChange(pageNumber: number): void {
+    this.currentPage = pageNumber;
+    this.getAllProducts();
+  }
+
+  onItemsPerPageChange(pageSize: number): void {
+    this.pageSize = pageSize;
+    this.getAllProducts();
   }
 
   addToCart(theProduct: Product) {
@@ -47,4 +68,14 @@ export class ProductListComponent implements OnInit {
 
     this.cartService.addToCart(theCartItem);
   }
+}
+
+interface ProductsPageResponse {
+  products: Product[];
+  page: {
+    size: number;
+    totalElements: number;
+    totalPages: number;
+    number: number;
+  };
 }
