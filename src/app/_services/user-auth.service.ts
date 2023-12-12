@@ -6,6 +6,10 @@ import { Injectable } from '@angular/core';
 export class UserAuthService {
   constructor() {}
 
+  // public getCurrentUser(): any {
+  //   return null;
+  // }
+
   public setRoles(roles: []) {
     localStorage.setItem('roles', JSON.stringify(roles));
   }

@@ -12,6 +12,9 @@ import { UserComponent } from './user/user.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductByCategoryComponent } from './product-by-category/product-by-category.component';
+import { AddProductComponent } from './add-product/add-product.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { ViewOrdersComponent } from './view-orders/view-orders.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -33,12 +36,12 @@ const routes: Routes = [
   //   canActivate: [AuthGuard],
   //   data: { roles: ['Admin'] },
   // },
-  // {
-  //   path: 'myOrders',
-  //   component: OrdersComponent,
-  //   canActivate: [AuthGuard],
-  //   data: { roles: ['User'] },
-  // },
+  {
+    path: 'viewOrders',
+    component: ViewOrdersComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['User'] },
+  },
   {
     path: 'allUsers',
     component: AllusersComponent,
@@ -52,6 +55,18 @@ const routes: Routes = [
   { path: 'category/:id', component: ProductListComponent },
   { path: 'category', component: ProductListComponent },
   { path: 'products', component: ProductListComponent },
+  {
+    path: 'addProduct',
+    component: AddProductComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['Admin'] },
+  },
+  {
+    path: 'checkout',
+    component: CheckoutComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['User'] },
+  },
   {
     path: 'product-category/category/:id',
     component: ProductByCategoryComponent,

@@ -12,3 +12,9 @@
   text-align: center;
   min-width: 100%;
 }
+
+a:link {
+  text-decoration: none;
+  color: brown;
+  size: 20px;
+}

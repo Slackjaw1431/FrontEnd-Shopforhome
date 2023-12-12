@@ -10,9 +10,9 @@ import { ProductCategory } from '../product-category';
   providedIn: 'root',
 })
 export class ProductService {
-  private baseUrl = 'http://localhost:9090/products';
+  private baseUrl = 'http://localhost:9091/products';
 
-  private categoryUrl = 'http://localhost:9090/product-category';
+  private categoryUrl = 'http://localhost:9091/product-category';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -27,7 +27,7 @@ export class ProductService {
 
   getProduct(theProductId: number): Observable<Product> {
     // need to build URL based on product id
-    const productUrl = `http://localhost:9090/products/${theProductId}`;
+    const productUrl = `http://localhost:9091/products/${theProductId}`;
 
     return this.httpClient.get<Product>(productUrl);
   }
@@ -39,7 +39,7 @@ export class ProductService {
   ): Observable<GetResponseProducts> {
     // need to build URL based on category id, page and size
     const searchUrl =
-      `http://localhost:9090/products/search/findByCategoryId?id=${theCategoryId}` +
+      `http://localhost:9091/products/search/findByCategoryId?id=${theCategoryId}` +
       `&page=${thePage}&size=${thePageSize}`;
 
     return this.httpClient.get<GetResponseProducts>(searchUrl);
@@ -109,6 +109,27 @@ export class ProductService {
         page: response.page,
       }))
     );
+  }
+
+  addProduct(newProduct: Product): Observable<any> {
+    // console.log('pRODUCT service: ' + JSON.stringify(newProduct));
+
+    const product: any = {
+      sku: newProduct.sku || '',
+      name: newProduct.name || '',
+      description: newProduct.description || '',
+      brand: newProduct.brand || '',
+      discount: newProduct.discount || '',
+      unitPrice: newProduct.unitPrice || 0,
+      totalSold: newProduct.totalSold || 0,
+      unitsInStock: newProduct.unitsInStock || 0,
+      category: newProduct.category || 0,
+      imageUrl: newProduct.imageUrl || '',
+    };
+
+    console.log('ADDING ' + JSON.stringify(product));
+
+    return this.httpClient.post<any>(this.baseUrl, newProduct);
   }
 }
 

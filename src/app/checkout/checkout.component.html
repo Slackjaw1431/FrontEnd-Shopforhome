@@ -1,0 +1,35 @@
+<div class="container mt-5">
+  <div class="card" style="padding: 20px">
+    <div class="checkout-container">
+      <h1>Checkout</h1>
+      <form class="checkout-form">
+        <div>
+          <label for="username">Username</label>
+          <input
+            class="form-control mb-3"
+            type="text"
+            id="username"
+            name="username"
+            [(ngModel)]="formData.username"
+          />
+        </div>
+        <div>
+          <label for="firstname">First Name</label>
+          <input
+            class="form-control mb-3"
+            type="text"
+            id="firstname"
+            name="firstname"
+            [(ngModel)]="formData.firstname"
+          />
+        </div>
+        <button
+          type="submit"
+          class="btn btn-outline-primary form-control rounded-0"
+        >
+          Place Order
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

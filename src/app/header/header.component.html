@@ -38,6 +38,15 @@
             >View All Users</a
           >
         </li>
+        <li>
+          <a
+            class="nav-link active"
+            aria-current="page"
+            routerLink="/addProduct"
+            *ngIf="userService.roleMatch(['Admin'])"
+            >Add a Product</a
+          >
+        </li>
         <!-- <li>
           <a
             class="nav-link active"
@@ -59,6 +68,15 @@
             routerLink="/user"
             *ngIf="userService.roleMatch(['User'])"
             >User Dashboard</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            routerLink="/viewOrders"
+            *ngIf="userService.roleMatch(['User'])"
+            >My Orders</a
           >
         </li>
         <!-- <li class="nav-item">
