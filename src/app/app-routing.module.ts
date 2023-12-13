@@ -15,6 +15,7 @@ import { ProductByCategoryComponent } from './product-by-category/product-by-cat
 import { AddProductComponent } from './add-product/add-product.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ViewOrdersComponent } from './view-orders/view-orders.component';
+import { AddCategoryComponent } from './add-category/add-category.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -58,6 +59,12 @@ const routes: Routes = [
   {
     path: 'addProduct',
     component: AddProductComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['Admin'] },
+  },
+  {
+    path: 'addCategory',
+    component: AddCategoryComponent,
     canActivate: [AuthGuard],
     data: { roles: ['Admin'] },
   },

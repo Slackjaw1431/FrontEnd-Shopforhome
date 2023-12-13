@@ -30,6 +30,7 @@ import { FooterComponent } from './footer/footer.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ViewOrdersComponent } from './view-orders/view-orders.component';
+import { AddCategoryComponent } from './add-category/add-category.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { ViewOrdersComponent } from './view-orders/view-orders.component';
     AddProductComponent,
     CheckoutComponent,
     ViewOrdersComponent,
+    AddCategoryComponent,
   ],
   imports: [
     BrowserModule,

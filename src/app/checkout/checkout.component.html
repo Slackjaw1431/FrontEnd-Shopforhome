@@ -2,7 +2,7 @@
   <div class="card" style="padding: 20px">
     <div class="checkout-container">
       <h1>Checkout</h1>
-      <form class="checkout-form">
+      <form class="checkout-form" (ngSubmit)="checkoutOrder()">
         <div>
           <label for="username">Username</label>
           <input
@@ -21,6 +21,16 @@
             id="firstname"
             name="firstname"
             [(ngModel)]="formData.firstname"
+          />
+        </div>
+        <div>
+          <label for="lastname">Last Name</label>
+          <input
+            class="form-control mb-3"
+            type="text"
+            id="lastname"
+            name="lastname"
+            [(ngModel)]="formData.lastname"
           />
         </div>
         <button

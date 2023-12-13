@@ -1,1 +1,26 @@
-<p>view-orders works!</p>
+<table>
+  <thead>
+    <tr>
+      <th>Order ID</th>
+      <th>User Name</th>
+      <th>Products</th>
+      <th>Date Created</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of myOrders">
+      <td>{{ order.orderId }}</td>
+      <td>{{ order.userName }}</td>
+      <td>
+        <ul>
+          <li *ngFor="let product of order.products">
+            {{ product.name }} - {{ product.quantity }}
+          </li>
+        </ul>
+      </td>
+      <td>{{ order.dateCreated | date }}</td>
+      <td>{{ order.total }}</td>
+    </tr>
+  </tbody>
+</table>

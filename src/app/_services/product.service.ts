@@ -131,6 +131,16 @@ export class ProductService {
 
     return this.httpClient.post<any>(this.baseUrl, newProduct);
   }
+
+  addCategory(newCategory: ProductCategory): Observable<any> {
+    const category: any = {
+      name: newCategory.categoryName || '',
+    };
+
+    console.log('ADDING ' + JSON.stringify(category));
+
+    return this.httpClient.post<any>(this.categoryUrl, newCategory);
+  }
 }
 
 interface GetResponseProducts {

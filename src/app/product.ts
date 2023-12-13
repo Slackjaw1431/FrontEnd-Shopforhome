@@ -1,3 +1,5 @@
+import { ProductCategory } from './product-category';
+
 export class Product {
   constructor(
     public id?: string,
@@ -9,7 +11,7 @@ export class Product {
     public unitPrice?: number,
     public imageUrl?: string,
     public totalSold?: number,
-    public category?: any,
+    public category?: ProductCategory, // Assuming ProductCategory is the related class
     public unitsInStock?: number,
     public dateCreated?: Date,
     public lastUpdated?: Date

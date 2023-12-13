@@ -1,5 +1,28 @@
 <div class="container mt-5">
   <div class="card" style="padding: 20px">
+    <form (ngSubmit)="addCategory()">
+      <label for="name">Category Name:</label>
+      <input
+        class="form-control mb-3"
+        type="text"
+        id="categoryName"
+        name="categoryName"
+        [(ngModel)]="newCategory.categoryName"
+        required
+      /><br />
+      <br />
+
+      <button
+        type="submit"
+        class="btn btn-outline-primary form-control rounded-0"
+      >
+        Add Category
+      </button>
+    </form>
+  </div>
+</div>
+<div class="container mt-5">
+  <div class="card" style="padding: 20px">
     <form (ngSubmit)="addProduct()">
       <label for="sku">SKU:</label>
       <input
