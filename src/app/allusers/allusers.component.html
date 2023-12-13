@@ -16,13 +16,23 @@
         <td>{{ user.userFirstName }}</td>
         <td>{{ user.userLastName }}</td>
         <td>
-          <a class="btn btn-secondary">Update</a>
+          <a
+            class="btn btn-secondary"
+            [routerLink]="['/editUser/' + user.userName]"
+            >Update</a
+          >
         </td>
         <td>
           <a class="btn btn-secondary">Orders</a>
         </td>
         <td>
-          <button type="button" class="btn btn-danger">Delete</button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="deleteUser(user.userName)"
+          >
+            Delete
+          </button>
         </td>
       </tr>
     </tbody>

@@ -16,6 +16,8 @@ import { AddProductComponent } from './add-product/add-product.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ViewOrdersComponent } from './view-orders/view-orders.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -59,6 +61,18 @@ const routes: Routes = [
   {
     path: 'addProduct',
     component: AddProductComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['Admin'] },
+  },
+  {
+    path: 'editProduct/:id',
+    component: EditProductComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['Admin'] },
+  },
+  {
+    path: 'editUser/:userName',
+    component: EditUserComponent,
     canActivate: [AuthGuard],
     data: { roles: ['Admin'] },
   },

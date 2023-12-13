@@ -141,6 +141,12 @@ export class ProductService {
 
     return this.httpClient.post<any>(this.categoryUrl, newCategory);
   }
+
+  updateProduct(productId: number, productData: any): Observable<any> {
+    const url = `${this.baseUrl}/${productId}`;
+    // console.log('In the product service :' + JSON.stringify(productData));
+    return this.httpClient.put<any>(url, productData);
+  }
 }
 
 interface GetResponseProducts {

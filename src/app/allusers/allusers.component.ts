@@ -38,6 +38,17 @@ export class AllusersComponent implements OnInit {
       });
   }
 
+  deleteUser(userName: string): void {
+    this.userService.deleteUser(userName).subscribe(
+      (response) => {
+        console.log('User deleted successfully:', response);
+      },
+      (error) => {
+        console.error('Error deleting user:', error);
+      }
+    );
+  }
+
   onPageChange(currentPage: number): void {
     this.currentPage = currentPage;
     this.getUserList();

@@ -45,6 +45,24 @@ export class UserService {
     );
   }
 
+  getUserDetails(userName: string): Observable<User> {
+    const url = `http://localhost:9090/userById/${userName}`;
+
+    return this.httpclient.get<User>(url);
+  }
+
+  deleteUser(userName: string): Observable<any> {
+    const url = `http://localhost:9090/deleteUser/${userName}`;
+
+    return this.httpclient.delete(url);
+  }
+
+  updateUser(userData: any): Observable<any> {
+    const url = `http://localhost:9090/updateUser`;
+
+    return this.httpclient.put(url, userData);
+  }
+
   public forUser() {
     return this.httpclient.get(this.PATH_OF_API + '/forUser', {
       responseType: 'text',
