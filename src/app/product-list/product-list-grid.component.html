@@ -12,7 +12,12 @@
             <div class="price">
               {{ tempProduct.unitPrice | currency : "USD" }}
             </div>
+            <button *ngIf="isAdmin" class="btn btn-primary btn-sm">
+              Delete
+            </button>
+
             <button
+              *ngIf="!isAdmin"
               (click)="addToCart(tempProduct)"
               class="btn btn-primary btn-sm"
             >

@@ -4,6 +4,7 @@ import { CartItem } from '../cart-item';
 import { Product } from '../product';
 import { ProductService } from '../_services/product.service';
 import { CartService } from '../_services/cart.service';
+import { UserService } from '../_services/user.service';
 
 @Component({
   selector: 'app-product-details',
@@ -12,14 +13,17 @@ import { CartService } from '../_services/cart.service';
 })
 export class ProductDetailsComponent implements OnInit {
   product: Product = new Product();
+  isAdmin: boolean = false;
 
   constructor(
     private productService: ProductService,
     private cartService: CartService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
+    this.assignType();
     this.route.paramMap.subscribe(() => {
       this.handleProductDetails();
     });
@@ -47,5 +51,15 @@ export class ProductDetailsComponent implements OnInit {
     );
 
     this.cartService.addToCart(theCartItem);
+  }
+
+  assignType(): void {
+    if (this.userService.roleMatch(['Admin'])) {
+      this.isAdmin = true;
+    } else if (this.userService.roleMatch(['User'])) {
+      this.isAdmin = false;
+    } else {
+      console.log('assign type not implemented in product details ts');
+    }
   }
 }

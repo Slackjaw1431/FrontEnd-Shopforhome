@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { timeoutWith } from 'rxjs/operators';
 import { CartItem } from 'src/app/cart-item';
 import { CartService } from 'src/app/_services/cart.service';
+import { UserService } from '../_services/user.service';
 
 @Component({
   selector: 'app-product-list',
@@ -13,6 +14,8 @@ import { CartService } from 'src/app/_services/cart.service';
 })
 export class ProductListComponent implements OnInit {
   products: Product[] = [];
+  isAdmin: boolean = false;
+
   page = {
     size: 0,
     totalElements: 0,
@@ -26,11 +29,13 @@ export class ProductListComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private cartService: CartService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
     // this.products = this.productService.getAllProducts();
+    this.assignType();
     this.getAllProducts();
   }
 
@@ -65,6 +70,16 @@ export class ProductListComponent implements OnInit {
     );
 
     this.cartService.addToCart(theCartItem);
+  }
+
+  assignType(): void {
+    if (this.userService.roleMatch(['Admin'])) {
+      this.isAdmin = true;
+    } else if (this.userService.roleMatch(['User'])) {
+      this.isAdmin = false;
+    } else {
+      this.isAdmin = false;
+    }
   }
 }
 

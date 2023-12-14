@@ -4,10 +4,19 @@
 
     <h3>{{ product.name }}</h3>
     <div class="price">{{ product.unitPrice | currency : "USD" }}</div>
-    <button (click)="addToCart()" class="btn btn-primary btn-sm">
+
+    <button *ngIf="isAdmin" class="btn btn-primary btn-sm">Delete</button>
+    &nbsp;&nbsp;
+    <button
+      *ngIf="!isAdmin"
+      (click)="addToCart()"
+      class="btn btn-primary btn-sm"
+    >
       Add to cart
     </button>
+
     <button
+      *ngIf="isAdmin"
       [routerLink]="'/editProduct/' + product.id"
       class="btn btn-primary btn-sm"
     >
