@@ -5,6 +5,7 @@
         <!-- loop over the collection of products -->
         <div *ngFor="let tempProduct of products" class="col-md-3">
           <div class="product-box">
+            <img src="{{ tempProduct.imageUrl }}" class="detail-img" />
             <a routerLink="/products/{{ tempProduct.id }}">
               <h1>{{ tempProduct.name }}</h1>
             </a>
@@ -13,6 +14,7 @@
               {{ tempProduct.unitPrice | currency : "USD" }}
             </div>
             <button
+              *ngIf="!isAdmin"
               (click)="addToCart(tempProduct)"
               class="btn btn-primary btn-sm"
             >

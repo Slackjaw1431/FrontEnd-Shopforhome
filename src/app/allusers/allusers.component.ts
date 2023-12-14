@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../_services/user.service';
 import { User } from '../user/user';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
 
 @Component({
@@ -11,15 +11,18 @@ import { switchMap } from 'rxjs';
 })
 export class AllusersComponent implements OnInit {
   users: User[] = [];
+  unfilteredUsers: User[] = [];
   totalElements: number;
   totalPages: number;
   currentPage: number = 0;
   pageSize: number = 5;
   pageableResponse: PageableResponse | undefined;
+  hiddenUserId = 'admin';
 
   constructor(
     private userService: UserService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -30,12 +33,31 @@ export class AllusersComponent implements OnInit {
     this.userService
       .getUsers(this.currentPage, this.pageSize)
       .subscribe((response: UserPageResponse) => {
-        this.users = response.users;
+        this.unfilteredUsers = response.users;
+
+        this.users = this.unfilteredUsers.filter(
+          (user) => user.userName.toLowerCase() !== 'admin'
+        );
+
         this.pageSize = response.size;
         this.totalElements = response.totalElements;
         this.currentPage = response.number;
         this.totalPages = response.totalPages;
       });
+  }
+
+  deleteUser(userName: string): void {
+    this.userService.deleteUser(userName).subscribe(
+      (response) => {
+        console.log('User deleted successfully:', response);
+        window.alert('User deleted successfully');
+        this.router.navigate(['/allUsers']);
+      },
+      (error) => {
+        console.error('Error deleting user:', error);
+        window.alert('Error deleting user');
+      }
+    );
   }
 
   onPageChange(currentPage: number): void {

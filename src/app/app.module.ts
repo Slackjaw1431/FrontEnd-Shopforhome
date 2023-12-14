@@ -4,7 +4,7 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AuthGuard } from './_auth/auth.guard';
 import { AuthInterceptor } from './_auth/auth.interceptor';
@@ -27,6 +27,12 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductByCategoryComponent } from './product-by-category/product-by-category.component';
 import { FooterComponent } from './footer/footer.component';
+import { AddProductComponent } from './add-product/add-product.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { ViewOrdersComponent } from './view-orders/view-orders.component';
+import { AddCategoryComponent } from './add-category/add-category.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +53,12 @@ import { FooterComponent } from './footer/footer.component';
     ProductDetailsComponent,
     ProductByCategoryComponent,
     FooterComponent,
+    AddProductComponent,
+    CheckoutComponent,
+    ViewOrdersComponent,
+    AddCategoryComponent,
+    EditProductComponent,
+    EditUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,6 +68,7 @@ import { FooterComponent } from './footer/footer.component';
     RouterModule,
     CommonModule,
     NgbPaginationModule,
+    ReactiveFormsModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

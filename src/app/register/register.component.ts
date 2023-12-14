@@ -17,19 +17,26 @@ export class RegisterComponent {
     userName: '',
     userPassword: '',
   };
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {}
 
-  registerUser(): void {
-    console.log(this.user);
-    this.userService.registerUser(this.user).subscribe(
-      (response) => {
-        console.log('User registered successfully:', response);
-        // Additional handling after successful registration
-      },
-      (error) => {
-        console.error('Error registering user:', error);
-        // Handle error
-      }
-    );
+  registerUser(form: any): void {
+    if (form.valid) {
+      console.log(this.user);
+      this.userService.registerUser(this.user).subscribe(
+        (response) => {
+          console.log('User registered successfully:', response);
+          window.alert('User registered');
+          this.router.navigate(['/login']);
+          // Additional handling after successful registration
+        },
+        (error) => {
+          console.error('Error registering user:', error);
+          window.alert('Error registering User');
+          // Handle error
+        }
+      );
+    } else {
+      window.alert('Please fill out all the details');
+    }
   }
 }

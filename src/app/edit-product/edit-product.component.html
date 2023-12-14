@@ -1,0 +1,116 @@
+<div class="container mt-5">
+  <div class="card" style="padding: 20px">
+    <form #productForm="ngForm" (ngSubmit)="updateProduct(productForm.value)">
+      <label for="sku">SKU:</label>
+      <input
+        class="form-control mb-3"
+        type="text"
+        id="sku"
+        name="sku"
+        [(ngModel)]="product.sku"
+        required
+      /><br />
+
+      <label for="name">Name:</label>
+      <input
+        class="form-control mb-3"
+        type="text"
+        id="name"
+        name="name"
+        [(ngModel)]="product.name"
+        required
+      /><br />
+
+      <label for="description">Description:</label>
+      <textarea
+        class="form-control mb-3"
+        id="description"
+        name="description"
+        [(ngModel)]="product.description"
+        required
+      ></textarea
+      ><br />
+
+      <label for="brand">Brand:</label>
+      <input
+        class="form-control mb-3"
+        type="text"
+        id="brand"
+        name="brand"
+        [(ngModel)]="product.brand"
+        required
+      /><br />
+
+      <label for="discount">Discount:</label>
+      <input
+        class="form-control mb-3"
+        type="number"
+        id="discount"
+        name="discount"
+        [(ngModel)]="product.discount"
+        required
+      /><br />
+
+      <label for="unit_price">Unit Price:</label>
+      <input
+        class="form-control mb-3"
+        type="number"
+        id="unitPrice"
+        name="unitPrice"
+        [(ngModel)]="product.unitPrice"
+        required
+      /><br />
+
+      <label for="image_url">Image URL:</label>
+      <input
+        class="form-control mb-3"
+        type="text"
+        id="imageUrl"
+        name="imageUrl"
+        [(ngModel)]="product.imageUrl"
+        required
+      /><br />
+
+      <label for="units_in_stock">Units in Stock:</label>
+      <input
+        class="form-control mb-3"
+        type="number"
+        id="unitsInStock"
+        name="unitsInStock"
+        [(ngModel)]="product.unitsInStock"
+        required
+      /><br />
+
+      <label for="total_sold">Total Sold:</label>
+      <input
+        class="form-control mb-3"
+        type="number"
+        id="totalSold"
+        name="totalSold"
+        [(ngModel)]="product.totalSold"
+        required
+      /><br />
+      <!-- <select
+        class="form-control mb-3"
+        id="category"
+        name="category"
+        [(ngModel)]="product.category"
+        required
+        [value]="product.category"
+      ></select> -->
+
+      <button
+        type="submit"
+        class="btn btn-outline-primary form-control rounded-0"
+      >
+        Update Product
+      </button>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+    </form>
+  </div>
+</div>

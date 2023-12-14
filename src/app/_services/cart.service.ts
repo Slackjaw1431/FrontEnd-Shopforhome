@@ -10,6 +10,7 @@ export class CartService {
 
   totalPrice: Subject<number> = new BehaviorSubject<number>(0);
   totalQuantity: Subject<number> = new BehaviorSubject<number>(0);
+  orderTotal: number;
 
   storage: Storage = sessionStorage;
   // storage: Storage = localStorage;
@@ -26,14 +27,6 @@ export class CartService {
     }
 
     if (data === null) {
-      // const item1 = new CartItem('123', 'Product A', 'image-url', 10.99, 1);
-      // const item2 = new CartItem('123', 'Product B', 'image-url', 10.99, 1);
-      // const item3 = new CartItem('123', 'Product A', 'image-url', 10.99, 1);
-
-      // this.cartItems.push(item1);
-      // this.cartItems.push(item2);
-      // this.cartItems.push(item3);
-
       this.computeCartTotals();
     }
   }
@@ -73,6 +66,7 @@ export class CartService {
     for (let currentCartItem of this.cartItems) {
       totalPriceValue += currentCartItem.quantity * currentCartItem.unitPrice!;
       totalQuantityValue += currentCartItem.quantity;
+      // console.log(currentCartItem.discount);
     }
 
     console.log('Signed in as: ' + localStorage.getItem('userName'));
@@ -83,6 +77,7 @@ export class CartService {
 
     // log cart data just for debugging purposes
     this.logCartData(totalPriceValue, totalQuantityValue);
+    this.orderTotal = totalPriceValue;
 
     // persist cart data
     this.persistCartItems();
@@ -90,6 +85,7 @@ export class CartService {
 
   persistCartItems() {
     this.storage.setItem('cartItems', JSON.stringify(this.cartItems));
+    this.storage.setItem('orderTotal', this.orderTotal.toString());
   }
 
   logCartData(totalPriceValue: number, totalQuantityValue: number) {

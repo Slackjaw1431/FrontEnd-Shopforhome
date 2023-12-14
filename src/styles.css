@@ -128,6 +128,7 @@ a:hover {
 .main-content {
   padding-top: 116px;
   min-height: 100vh;
+  margin-bottom: 50px; /* Adjust the value to create space for the footer */
 }
 
 aside.menu-sidebar.d-none.d-lg-block.clr {
@@ -771,10 +772,14 @@ table.table.table-bordered th {
 
 .detail-section {
   margin-top: 60px;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .detail-img {
-  width: 30%;
+  width: 150px;
+  height: 150px;
 }
 
 /**/
@@ -906,6 +911,9 @@ footer ul li {
   .main-content {
     padding-top: 50px;
     padding-bottom: 100px;
+    max-width: 70%;
+    margin-right: auto;
+    margin-left: auto;
   }
   .cart-area.d-n {
     display: none;

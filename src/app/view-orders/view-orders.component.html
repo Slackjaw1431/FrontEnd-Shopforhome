@@ -1,0 +1,35 @@
+<div class="container mt-5">
+  <div *ngIf="orderObject">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Date Created</th>
+          <th>User ID</th>
+          <th>Total</th>
+          <th>Order Items</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orderObject.content">
+          <td>{{ order.orderId }}</td>
+          <td>{{ order.dateCreated }}</td>
+          <td>{{ order.userId }}</td>
+          <td>{{ order.total | currency }}</td>
+          <td>
+            <ul>
+              <li *ngFor="let orderItem of order.orderItems">
+                Product ID:
+                {{ orderItem.productId }}, Quantity: {{ orderItem.quantity }},
+                Name: {{ orderItem.name }}, Unit Price:
+                {{ orderItem.unitPrice | currency }}
+              </li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- </table> -->
+</div>

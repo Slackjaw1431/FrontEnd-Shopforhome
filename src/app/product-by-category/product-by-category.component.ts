@@ -5,6 +5,7 @@ import { Product } from '../product';
 import { CartItem } from '../cart-item';
 import { CartService } from '../_services/cart.service';
 import { switchMap } from 'rxjs';
+import { UserService } from '../_services/user.service';
 
 @Component({
   selector: 'app-product-by-category',
@@ -13,6 +14,8 @@ import { switchMap } from 'rxjs';
 })
 export class ProductByCategoryComponent implements OnInit {
   products: Product[] = [];
+  isAdmin: boolean = false;
+
   page = {
     size: 0,
     totalElements: 0,
@@ -27,10 +30,12 @@ export class ProductByCategoryComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private cartService: CartService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
+    this.assignType();
     this.getProductsByCategory();
   }
 
@@ -75,6 +80,16 @@ export class ProductByCategoryComponent implements OnInit {
     );
 
     this.cartService.addToCart(theCartItem);
+  }
+
+  assignType(): void {
+    if (this.userService.roleMatch(['Admin'])) {
+      this.isAdmin = true;
+    } else if (this.userService.roleMatch(['User'])) {
+      this.isAdmin = false;
+    } else {
+      this.isAdmin = false;
+    }
   }
 }
 
