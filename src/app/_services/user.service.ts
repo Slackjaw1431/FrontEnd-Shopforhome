@@ -63,6 +63,12 @@ export class UserService {
     return this.httpclient.put(url, userData);
   }
 
+  updateSelf(userData: any): Observable<any> {
+    const url = `http://localhost:9090/updateSelf`;
+
+    return this.httpclient.put(url, userData);
+  }
+
   public forUser() {
     return this.httpclient.get(this.PATH_OF_API + '/forUser', {
       responseType: 'text',

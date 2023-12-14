@@ -56,12 +56,12 @@ export class ProductListComponent implements OnInit {
   addToCart(theProduct: Product) {
     console.log(`Adding to cart: ${theProduct.name}, ${theProduct.unitPrice}`);
 
-    //add user details? or do when creating cart-> check localstorag for user
     let theCartItem = new CartItem(
       theProduct.id,
       theProduct.name,
       theProduct.imageUrl,
       theProduct.unitPrice
+      // theProduct.discount
     );
 
     this.cartService.addToCart(theCartItem);

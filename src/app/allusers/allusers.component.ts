@@ -11,11 +11,13 @@ import { switchMap } from 'rxjs';
 })
 export class AllusersComponent implements OnInit {
   users: User[] = [];
+  unfilteredUsers: User[] = [];
   totalElements: number;
   totalPages: number;
   currentPage: number = 0;
   pageSize: number = 5;
   pageableResponse: PageableResponse | undefined;
+  hiddenUserId = 'admin';
 
   constructor(
     private userService: UserService,
@@ -30,7 +32,12 @@ export class AllusersComponent implements OnInit {
     this.userService
       .getUsers(this.currentPage, this.pageSize)
       .subscribe((response: UserPageResponse) => {
-        this.users = response.users;
+        this.unfilteredUsers = response.users;
+
+        this.users = this.unfilteredUsers.filter(
+          (user) => user.userName.toLowerCase() !== 'admin'
+        );
+
         this.pageSize = response.size;
         this.totalElements = response.totalElements;
         this.currentPage = response.number;

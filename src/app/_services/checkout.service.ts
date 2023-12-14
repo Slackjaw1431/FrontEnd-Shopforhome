@@ -15,10 +15,4 @@ export class CheckoutService {
     console.log(JSON.stringify(newOrder));
     return this.httpClient.post<any>(this.baseUrl, newOrder);
   }
-
-  getOrderForCurrentUser(userName: string): Observable<Order[]> {
-    const url = `${this.baseUrl}/byUser/${userName}`;
-
-    return this.httpClient.get<any>(url);
-  }
 }

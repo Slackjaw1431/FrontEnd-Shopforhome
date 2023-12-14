@@ -6,10 +6,6 @@ import { Injectable } from '@angular/core';
 export class UserAuthService {
   constructor() {}
 
-  // public getCurrentUser(): any {
-  //   return null;
-  // }
-
   public setRoles(roles: []) {
     localStorage.setItem('roles', JSON.stringify(roles));
   }
@@ -33,4 +29,35 @@ export class UserAuthService {
   public isLoggedIn() {
     return this.getRoles() && this.getToken();
   }
+
+  // public isAdmin(): void {
+  //   const rolesString = localStorage.getItem('roles');
+
+  //   // Parse the roles string to JSON format
+  //   let roles: { roleName: string; roleDescription: string } | null = null;
+
+  //   if (rolesString) {
+  //     try {
+  //       roles = JSON.parse(rolesString);
+  //     } catch (error) {
+  //       console.error('Error parsing roles from LocalStorage:', error);
+  //     }
+  //   }
+
+  // Check if roleName is 'Admin'
+  //   if (roles && roles.roleName === 'Admin') {
+  //     console.log('User has Admin role');
+  //   } else {
+  //     console.log('User does not have Admin role');
+  //   }
+  // }
+
+  // public isUser(): boolean {
+  //   const roles = JSON.parse(localStorage.getItem('roles'));
+  //   if (roles.roleName == 'User') {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
 }

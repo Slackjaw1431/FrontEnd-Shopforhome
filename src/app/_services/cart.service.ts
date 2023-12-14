@@ -66,6 +66,7 @@ export class CartService {
     for (let currentCartItem of this.cartItems) {
       totalPriceValue += currentCartItem.quantity * currentCartItem.unitPrice!;
       totalQuantityValue += currentCartItem.quantity;
+      // console.log(currentCartItem.discount);
     }
 
     console.log('Signed in as: ' + localStorage.getItem('userName'));

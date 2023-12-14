@@ -77,6 +77,18 @@ const routes: Routes = [
     data: { roles: ['Admin'] },
   },
   {
+    path: 'viewOrders/:userName',
+    component: ViewOrdersComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['Admin'] },
+  },
+  {
+    path: 'edit',
+    component: EditUserComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['User'] },
+  },
+  {
     path: 'addCategory',
     component: AddCategoryComponent,
     canActivate: [AuthGuard],
