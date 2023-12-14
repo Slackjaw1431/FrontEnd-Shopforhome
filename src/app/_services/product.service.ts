@@ -147,6 +147,11 @@ export class ProductService {
     // console.log('In the product service :' + JSON.stringify(productData));
     return this.httpClient.put<any>(url, productData);
   }
+
+  deleteProduct(productId: number) {
+    const url = `${this.baseUrl}/${productId}`;
+    return this.httpClient.delete<any>(url);
+  }
 }
 
 interface GetResponseProducts {

@@ -62,4 +62,10 @@ export class ProductDetailsComponent implements OnInit {
       console.log('assign type not implemented in product details ts');
     }
   }
+
+  deleteProduct(theProductId: number) {
+    this.productService.deleteProduct(theProductId).subscribe((data) => {
+      this.product = data;
+    });
+  }
 }
