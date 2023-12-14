@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/_services/product.service';
 import { Product } from 'src/app/product';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router} from '@angular/router';
 import { timeoutWith } from 'rxjs/operators';
 import { CartItem } from 'src/app/cart-item';
 import { CartService } from 'src/app/_services/cart.service';
@@ -30,7 +30,8 @@ export class ProductListComponent implements OnInit {
     private productService: ProductService,
     private cartService: CartService,
     private route: ActivatedRoute,
-    private userService: UserService
+    private userService: UserService,
+    private router:Router
   ) {}
 
   ngOnInit(): void {
@@ -80,6 +81,10 @@ export class ProductListComponent implements OnInit {
     } else {
       this.isAdmin = false;
     }
+  }
+
+  redirectToViewDetails(id:number){
+    this.router.navigate(['/products', id])
   }
 }
 
