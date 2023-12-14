@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../_services/user.service';
 import { User } from '../user/user';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
 
 @Component({
@@ -21,7 +21,8 @@ export class AllusersComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -49,9 +50,12 @@ export class AllusersComponent implements OnInit {
     this.userService.deleteUser(userName).subscribe(
       (response) => {
         console.log('User deleted successfully:', response);
+        window.alert('User deleted successfully');
+        this.router.navigate(['/allUsers']);
       },
       (error) => {
         console.error('Error deleting user:', error);
+        window.alert('Error deleting user');
       }
     );
   }

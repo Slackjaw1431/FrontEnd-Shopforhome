@@ -1,6 +1,6 @@
 <div class="container mt-5">
   <div class="card" style="padding: 20px">
-    <form (ngSubmit)="addCategory()">
+    <form #myForm1="ngForm" (ngSubmit)="addCategory(myForm1)">
       <label for="name">Category Name:</label>
       <input
         class="form-control mb-3"
@@ -23,7 +23,7 @@
 </div>
 <div class="container mt-5">
   <div class="card" style="padding: 20px">
-    <form (ngSubmit)="addProduct()">
+    <form #myForm="ngForm" (ngSubmit)="addProduct(myForm)">
       <label for="sku">SKU:</label>
       <input
         class="form-control mb-3"

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../_services/product.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-product',
@@ -13,7 +13,8 @@ export class EditProductComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -30,13 +31,33 @@ export class EditProductComponent implements OnInit {
   }
 
   updateProduct(productData: any): void {
-    this.productService.updateProduct(this.productId, productData).subscribe(
-      (response) => {
-        console.log('Product details updated successfully:', response);
-      },
-      (error) => {
-        console.error('Error updating product:', error);
-      }
+    if (this.isProductDataValid(productData)) {
+      this.productService.updateProduct(this.productId, productData).subscribe(
+        (response) => {
+          console.log('Product details updated successfully:', response);
+          window.alert('Product details updated');
+          this.router.navigate(['/products']);
+        },
+        (error) => {
+          console.error('Error updating product:', error);
+          window.alert('Error updating product details');
+        }
+      );
+    } else {
+      window.alert('Please fill out all the details');
+    }
+  }
+
+  isProductDataValid(data: any): boolean {
+    return (
+      data.name &&
+      data.description &&
+      data.sku &&
+      data.brand &&
+      data.unitPrice &&
+      data.unitsInStock &&
+      data.totalSold &&
+      data.imageUrl
     );
   }
 }

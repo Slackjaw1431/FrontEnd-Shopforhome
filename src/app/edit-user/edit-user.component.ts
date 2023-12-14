@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../_services/user.service';
 import { User } from '../user/user';
 
@@ -20,7 +20,8 @@ export class EditUserComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -49,25 +50,42 @@ export class EditUserComponent implements OnInit {
   }
 
   updateUser(userData: any): void {
-    if (this.isUser) {
-      this.userService.updateSelf(userData).subscribe(
-        (response) => {
-          console.log('User details updated successfully:', response);
-        },
-        (error) => {
-          console.error('Error updating user:', error);
-        }
-      );
+    if (this.isUserDataValid(userData)) {
+      console.log(userData);
+      if (this.isUser) {
+        this.userService.updateSelf(userData).subscribe(
+          (response) => {
+            console.log('User details updated successfully:', response);
+            window.alert('User details updated successfully');
+          },
+          (error) => {
+            console.error('Error updating user:', error);
+          }
+        );
+      } else {
+        this.userService.updateUser(userData).subscribe(
+          (response) => {
+            console.log('User details updated successfully:', response);
+            window.alert('User details updated successfully');
+            this.router.navigate(['/login']);
+          },
+          (error) => {
+            console.error('Error updating user:', error);
+          }
+        );
+      }
     } else {
-      this.userService.updateUser(userData).subscribe(
-        (response) => {
-          console.log('User details updated successfully:', response);
-        },
-        (error) => {
-          console.error('Error updating user:', error);
-        }
-      );
+      window.alert('Please fill out all the details');
     }
+  }
+
+  isUserDataValid(data: any): boolean {
+    return (
+      data.userName &&
+      data.userFirstName &&
+      data.userLastName &&
+      data.userPassword
+    );
   }
 
   // updateUser(userData: any): void {
