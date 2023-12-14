@@ -1,29 +1,33 @@
 <div class="container mt-5">
   <div class="card" style="padding: 20px">
-    <form (ngSubmit)="registerUser()">
+    <form #form="ngForm" (ngSubmit)="registerUser(form)">
       <input
         type="text"
         class="form-control mb-3"
         [(ngModel)]="user.userFirstName"
         placeholder="First Name"
+        required
       /><br />
       <input
         type="text"
         class="form-control mb-3"
         [(ngModel)]="user.userLastName"
         placeholder="Last Name"
+        required
       /><br />
       <input
         type="text"
         class="form-control mb-3"
         [(ngModel)]="user.userName"
         placeholder="Username"
+        required
       /><br />
       <input
         type="password"
         class="form-control mb-3"
         [(ngModel)]="user.userPassword"
         placeholder="Password"
+        required
       /><br />
       <button
         type="submit"

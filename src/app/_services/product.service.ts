@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
@@ -14,7 +14,13 @@ export class ProductService {
 
   private categoryUrl = 'http://localhost:9091/product-category';
 
+  categoryAdded: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   constructor(private httpClient: HttpClient) {}
+
+  emitCategoryAdded() {
+    this.categoryAdded.emit(true);
+  }
 
   getProductCategories(): Observable<ProductCategory[]> {
     let categories = this.httpClient.get<GetResponseProductCategory>(
@@ -144,6 +150,7 @@ export class ProductService {
 
   updateProduct(productId: number, productData: any): Observable<any> {
     const url = `${this.baseUrl}/${productId}`;
+    console.log(productData.get);
     // console.log('In the product service :' + JSON.stringify(productData));
     return this.httpClient.put<any>(url, productData);
   }
