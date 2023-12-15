@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { UserAuthService } from '../_services/user-auth.service';
-import { Order } from '../order';
 import { CartService } from '../_services/cart.service';
 import { CheckoutService } from '../_services/checkout.service';
+import { Order } from '../order';
+import { Router } from '@angular/router';
+import { Product } from '../product';
+import { HttpBackend, HttpClient } from '@angular/common/http';
+import { ProductService } from '../_services/product.service';
 
 @Component({
   selector: 'app-checkout',
@@ -18,13 +20,22 @@ export class CheckoutComponent implements OnInit {
     dateCreated: new Date(),
     total: 0,
   };
+  productsToReduceStock: any[] = [];
+  product: Product;
+
   storedUsername = localStorage.getItem('userName');
   storedFirstName = localStorage.getItem('userFirstName');
   storedLastName = localStorage.getItem('userLastName');
 
   // Set the retrieved data to the form object
 
-  constructor(private checkoutService: CheckoutService) {}
+  constructor(
+    private checkoutService: CheckoutService,
+    private router: Router,
+    private cartService: CartService,
+    private httpClient: HttpClient,
+    private productService: ProductService
+  ) {}
 
   ngOnInit() {
     // Retrieve data from localStorage and set it to the form fields
@@ -53,6 +64,12 @@ export class CheckoutComponent implements OnInit {
         unitPrice: item.unitPrice,
       }));
 
+      const itemsBought = parsedData.map((item) => ({
+        id: item.id,
+        quantity: item.quantity,
+      }));
+
+      this.productsToReduceStock = itemsBought;
       this.order.products = customizedData;
     } else {
       console.log('No data found in sessionStorage');
@@ -63,10 +80,45 @@ export class CheckoutComponent implements OnInit {
     this.checkoutService.placeOrder(this.order).subscribe(
       (response) => {
         console.log('Order placed: ', response);
+        window.alert('Order has been placed');
+        this.cartService.clearCart();
+        this.router.navigate(['/products']);
       },
       (error) => {
         console.error('Error placing Order:', error);
       }
     );
+
+    this.productsToReduceStock.forEach((item) => {
+      const itemId = item.id;
+      const quantity = item.quantity;
+
+      this.productsToReduceStock.forEach((productId) => {
+        this.productService.getProduct(productId.id).subscribe(
+          (product) => {
+            this.product = product;
+            this.product.totalSold += quantity;
+            this.product.unitsInStock -= quantity;
+
+            this.productService
+              .updateProduct(productId.id, this.product)
+              .subscribe(
+                (response) => {
+                  console.log(
+                    'Product details updated successfully:',
+                    response
+                  );
+                },
+                (error) => {
+                  console.error('Error updating product:', error);
+                }
+              );
+          },
+          (error) => {
+            console.error('Error fetching product details:', error);
+          }
+        );
+      });
+    });
   }
 }
