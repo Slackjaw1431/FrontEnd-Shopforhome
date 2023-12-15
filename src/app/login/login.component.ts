@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
         this.userAuthService.setToken(response.jwtToken);
 
         console.log('TESTING RESPONSE');
-        console.log(response);
+        // console.log(response);
 
         localStorage.setItem('userName', response.user.userName);
         localStorage.setItem('userFirstName', response.user.userFirstName);

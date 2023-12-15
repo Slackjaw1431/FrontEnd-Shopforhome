@@ -35,14 +35,14 @@ export class ViewOrdersComponent implements OnInit {
     } else if (this.userService.roleMatch(['User'])) {
       this.userName = localStorage.getItem('userName');
     } else {
-      console.log(this.userName);
+      // console.log(this.userName);
     }
   }
 
   gettingOrders(): void {
     this.ordersService.getOrderForCurrentUser(this.userName).subscribe(
       (response) => {
-        console.log(response);
+        // console.log(response);
         this.orderObject = response;
       },
       (error) => {

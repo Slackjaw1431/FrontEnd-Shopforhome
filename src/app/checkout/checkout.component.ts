@@ -45,80 +45,84 @@ export class CheckoutComponent implements OnInit {
     // console.log(localStorage);
   }
 
-  checkoutOrder() {
-    //getting details from session storagee
-    this.order.userId = this.storedUsername;
-    this.order.dateCreated = new Date();
+  checkoutOrder(form: any) {
+    if (form.valid) {
+      //getting details from session storagee
+      this.order.userId = this.storedUsername;
+      this.order.dateCreated = new Date();
 
-    // this.order.products = JSON.parse(sessionStorage.getItem('cartItems'));
+      // this.order.products = JSON.parse(sessionStorage.getItem('cartItems'));
 
-    const storedData = sessionStorage.getItem('cartItems');
+      const storedData = sessionStorage.getItem('cartItems');
 
-    if (storedData) {
-      const parsedData = JSON.parse(storedData);
+      if (storedData) {
+        const parsedData = JSON.parse(storedData);
 
-      const customizedData = parsedData.map((item) => ({
-        id: item.id,
-        quantity: item.quantity,
-        name: item.name,
-        unitPrice: item.unitPrice,
-      }));
+        const customizedData = parsedData.map((item) => ({
+          id: item.id,
+          quantity: item.quantity,
+          name: item.name,
+          unitPrice: item.unitPrice,
+        }));
 
-      const itemsBought = parsedData.map((item) => ({
-        id: item.id,
-        quantity: item.quantity,
-      }));
+        const itemsBought = parsedData.map((item) => ({
+          id: item.id,
+          quantity: item.quantity,
+        }));
 
-      this.productsToReduceStock = itemsBought;
-      this.order.products = customizedData;
-    } else {
-      console.log('No data found in sessionStorage');
-    }
-
-    this.order.total = parseFloat(sessionStorage.getItem('orderTotal'));
-
-    this.checkoutService.placeOrder(this.order).subscribe(
-      (response) => {
-        console.log('Order placed: ', response);
-        window.alert('Order has been placed');
-        this.cartService.clearCart();
-        this.router.navigate(['/products']);
-      },
-      (error) => {
-        console.error('Error placing Order:', error);
+        this.productsToReduceStock = itemsBought;
+        this.order.products = customizedData;
+      } else {
+        console.log('No data found in sessionStorage');
       }
-    );
 
-    this.productsToReduceStock.forEach((item) => {
-      const itemId = item.id;
-      const quantity = item.quantity;
+      this.order.total = parseFloat(sessionStorage.getItem('orderTotal'));
 
-      this.productsToReduceStock.forEach((productId) => {
-        this.productService.getProduct(productId.id).subscribe(
-          (product) => {
-            this.product = product;
-            this.product.totalSold += quantity;
-            this.product.unitsInStock -= quantity;
+      this.checkoutService.placeOrder(this.order).subscribe(
+        (response) => {
+          console.log('Order placed: ', response);
+          window.alert('Order has been placed');
+          this.cartService.clearCart();
+          this.router.navigate(['/products']);
+        },
+        (error) => {
+          console.error('Error placing Order:', error);
+        }
+      );
 
-            this.productService
-              .updateProduct(productId.id, this.product)
-              .subscribe(
-                (response) => {
-                  console.log(
-                    'Product details updated successfully:',
-                    response
-                  );
-                },
-                (error) => {
-                  console.error('Error updating product:', error);
-                }
-              );
-          },
-          (error) => {
-            console.error('Error fetching product details:', error);
-          }
-        );
+      this.productsToReduceStock.forEach((item) => {
+        const itemId = item.id;
+        const quantity = item.quantity;
+
+        this.productsToReduceStock.forEach((productId) => {
+          this.productService.getProduct(productId.id).subscribe(
+            (product) => {
+              this.product = product;
+              this.product.totalSold += quantity;
+              this.product.unitsInStock -= quantity;
+
+              this.productService
+                .updateProduct(productId.id, this.product)
+                .subscribe(
+                  (response) => {
+                    console.log(
+                      'Product details updated successfully:',
+                      response
+                    );
+                  },
+                  (error) => {
+                    console.error('Error updating product:', error);
+                  }
+                );
+            },
+            (error) => {
+              console.error('Error fetching product details:', error);
+            }
+          );
+        });
       });
-    });
+    } else {
+      window.alert('Please fill out all the details');
+    }
   }
 }

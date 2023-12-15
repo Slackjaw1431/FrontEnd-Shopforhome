@@ -23,7 +23,7 @@ export class AdminComponent implements OnInit {
   forAdmin() {
     this.userService.forAdmin().subscribe(
       (response) => {
-        console.log(response);
+        // console.log(response);
         this.message = response;
       },
       (error) => {

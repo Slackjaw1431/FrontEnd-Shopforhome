@@ -2,7 +2,11 @@
   <div class="card" style="padding: 20px">
     <div class="checkout-container">
       <h1>Checkout</h1>
-      <form class="checkout-form" (ngSubmit)="checkoutOrder()">
+      <form
+        #checkout="ngForm"
+        class="checkout-form"
+        (ngSubmit)="checkoutOrder(checkout)"
+      >
         <div>
           <label for="username">Username</label>
           <input
@@ -11,6 +15,7 @@
             id="username"
             name="username"
             [(ngModel)]="formData.username"
+            required
           />
         </div>
         <div>
@@ -21,6 +26,7 @@
             id="firstname"
             name="firstname"
             [(ngModel)]="formData.firstname"
+            required
           />
         </div>
         <div>
@@ -31,6 +37,7 @@
             id="lastname"
             name="lastname"
             [(ngModel)]="formData.lastname"
+            required
           />
         </div>
         <button
