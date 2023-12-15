@@ -3,15 +3,21 @@
     <img src="{{ product.imageUrl }}" class="detail-img" />
 
     <h3>{{ product.name }}</h3>
-    <div class="price">{{ product.unitPrice | currency : "USD" }}</div>
+    <div class="price">MSRP: {{ product.unitPrice | currency : "USD" }}</div>
+    <p><strong>Discount Rate:</strong> {{ product.discount | percent }}</p>
+    <p><strong>Stock:</strong> {{ product.unitsInStock }}</p>
+    <p><strong>Total Sold:</strong> {{ product.totalSold }}</p>
+    <br />
 
     <button
-      *ngIf="!isAdmin"
+      *ngIf="!isAdmin && product.unitsInStock > 0"
       (click)="addToCart()"
       class="btn btn-primary btn-sm"
     >
       Add to cart
     </button>
+
+    <p *ngIf="product.unitsInStock == 0">OUT OF STOCK</p>
 
     <button
       *ngIf="isAdmin"

@@ -21,7 +21,7 @@ export class AddCategoryComponent implements OnInit {
   addCategory(): void {
     this.productService.addCategory(this.newCategory).subscribe(
       (response) => {
-        console.log('Category added:', response);
+        // console.log('Category added:', response);
       },
       (error) => {
         console.error('Error adding Category:', error);

@@ -14,12 +14,13 @@
               <img
                 src="{{ tempCartItem.imageUrl }}"
                 class="img-responsive"
-                width="150px"
+                width="250px"
+                height="250px"
               />
             </td>
             <td>
-              <p>{{ tempCartItem.name }}</p>
-              <p>{{ tempCartItem.unitPrice | currency : "USD" }}</p>
+              <p>Product: {{ tempCartItem.name }}</p>
+              <p>MSRP: {{ tempCartItem.unitPrice | currency : "USD" }}</p>
             </td>
             <td>
               <div class="items">
@@ -60,11 +61,12 @@
                   Remove
                 </button>
               </div>
-
+              <p>Discount Rate: {{ tempCartItem.discount | percent }}</p>
               <p class="mt-2">
                 Subtotal:
                 {{
-                  tempCartItem.quantity! * tempCartItem?.unitPrice!
+                  tempCartItem.quantity! * tempCartItem?.unitPrice! -
+                    tempCartItem.unitPrice! * tempCartItem.discount!
                     | currency : "USD"
                 }}
               </p>
@@ -77,7 +79,6 @@
               <p>Total Quantity: {{ totalQuantity }}</p>
               <p>Shipping: Free</p>
               <p>Total Price: {{ totalPrice | currency : "USD" }}</p>
-
               <div>
                 <a routerLink="/checkout" class="btn btn-primary">Checkout</a>
                 <!-- <a routerLink="/login" class="btn btn-primary">Login</a> -->

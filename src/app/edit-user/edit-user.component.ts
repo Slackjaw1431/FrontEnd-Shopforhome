@@ -51,7 +51,7 @@ export class EditUserComponent implements OnInit {
 
   updateUser(userData: any): void {
     if (this.isUserDataValid(userData)) {
-      console.log(userData);
+      // console.log(userData);
       if (this.isUser) {
         this.userService.updateSelf(userData).subscribe(
           (response) => {

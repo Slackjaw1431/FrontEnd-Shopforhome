@@ -76,7 +76,8 @@ export class ProductByCategoryComponent implements OnInit {
       theProduct.id,
       theProduct.name,
       theProduct.imageUrl,
-      theProduct.unitPrice
+      theProduct.unitPrice,
+      theProduct.discount
     );
 
     this.cartService.addToCart(theCartItem);

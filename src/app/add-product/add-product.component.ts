@@ -33,16 +33,16 @@ export class AddProductComponent implements OnInit {
       this.productService.getProductCategories().subscribe((data: any) => {
         this.categories = data;
 
-        console.log('New product:', this.newProduct);
+        // console.log('New product:', this.newProduct);
 
-        console.log('Category ID:', this.newProduct.category.id); // Check if category ID exists
+        // console.log('Category ID:', this.newProduct.category.id); // Check if category ID exists
 
         // Find the category object from categories array based on ID
         this.selectedCategory = this.categories.find(
           (category) => category.id === this.newProduct.category.id
         );
 
-        console.log('Selected Category:', this.selectedCategory);
+        // console.log('Selected Category:', this.selectedCategory);
 
         if (this.selectedCategory) {
           // If a matching category is found, assign it to newProduct.category
@@ -65,7 +65,7 @@ export class AddProductComponent implements OnInit {
         // Add the new product
         this.productService.addProduct(this.newProduct).subscribe(
           (response) => {
-            console.log('Product added:', response);
+            // console.log('Product added:', response);
             window.alert('Product added');
             this.router.navigate(['/products']);
           },
@@ -83,7 +83,7 @@ export class AddProductComponent implements OnInit {
     if (form.valid) {
       this.productService.addCategory(this.newCategory).subscribe(
         (response) => {
-          console.log('Category added:', response);
+          // console.log('Category added:', response);
           window.alert('Category added');
           this.productService.emitCategoryAdded();
         },

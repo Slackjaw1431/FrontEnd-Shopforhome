@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CartItem } from '../cart-item';
 import { Product } from '../product';
 import { ProductService } from '../_services/product.service';
@@ -19,7 +19,8 @@ export class ProductDetailsComponent implements OnInit {
     private productService: ProductService,
     private cartService: CartService,
     private route: ActivatedRoute,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -47,7 +48,8 @@ export class ProductDetailsComponent implements OnInit {
       this.product.id,
       this.product.name,
       this.product.imageUrl,
-      this.product.unitPrice
+      this.product.unitPrice,
+      this.product.discount
     );
 
     this.cartService.addToCart(theCartItem);
@@ -66,6 +68,8 @@ export class ProductDetailsComponent implements OnInit {
   deleteProduct(theProductId: number) {
     this.productService.deleteProduct(theProductId).subscribe((data) => {
       this.product = data;
+      window.alert('Product deleted');
+      this.router.navigate(['/products']);
     });
   }
 }

@@ -11,15 +11,23 @@
             </a>
 
             <div class="price">
-              {{ tempProduct.unitPrice | currency : "USD" }}
+              <p>MSPR: {{ tempProduct.unitPrice | currency : "USD" }}</p>
             </div>
+            <p>
+              <strong>Discount Rate:</strong>
+              {{ tempProduct.discount | percent }}
+            </p>
+            <p><strong>Stock:</strong> {{ tempProduct.unitsInStock }}</p>
+            <p><strong>Total Sold:</strong> {{ tempProduct.totalSold }}</p>
+            <br />
             <button
-              *ngIf="!isAdmin"
+              *ngIf="!isAdmin && tempProduct.unitsInStock > 0"
               (click)="addToCart(tempProduct)"
               class="btn btn-primary btn-sm"
             >
               Add to cart
             </button>
+            <p *ngIf="tempProduct.unitsInStock == 0">OUT OF STOCK</p>
           </div>
         </div>
 
