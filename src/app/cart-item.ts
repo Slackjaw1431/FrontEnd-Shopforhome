@@ -6,7 +6,7 @@ export class CartItem {
     public name?: string,
     public imageUrl?: string,
     public unitPrice?: number,
+    public discount?: number,
     public quantity: number = 1
-  ) // public discount?: number
-  {}
+  ) {}
 }

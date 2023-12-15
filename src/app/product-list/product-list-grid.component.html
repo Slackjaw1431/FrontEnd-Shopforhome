@@ -11,12 +11,17 @@
             </a>
 
             <div class="price">
-              {{ tempProduct.unitPrice | currency : "USD" }}
+              MSRP: {{ tempProduct.unitPrice | currency : "USD" }}
             </div>
             &nbsp;
             <!-- <button *ngIf="isAdmin" class="btn btn-primary btn-sm">
               Delete
             </button> -->
+            <p>
+              <strong>Discount Rate:</strong>
+              {{ tempProduct.discount | percent }}
+            </p>
+            &nbsp;
             <p><strong>Stock:</strong> {{ tempProduct.unitsInStock }}</p>
             &nbsp;
             <p><strong>Total Sold:</strong> {{ tempProduct.totalSold }}</p>
@@ -28,6 +33,7 @@
             >
               Add to cart
             </button>
+            <p *ngIf="tempProduct.unitsInStock == 0">OUT OF STOCK</p>
           </div>
         </div>
 
@@ -53,3 +59,4 @@
     </button>
   </div>
 </div>
+<br /><br /><br /><br />

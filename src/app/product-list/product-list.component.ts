@@ -65,8 +65,8 @@ export class ProductListComponent implements OnInit {
       theProduct.id,
       theProduct.name,
       theProduct.imageUrl,
-      theProduct.unitPrice
-      // theProduct.discount
+      theProduct.unitPrice,
+      theProduct.discount
     );
 
     this.cartService.addToCart(theCartItem);
